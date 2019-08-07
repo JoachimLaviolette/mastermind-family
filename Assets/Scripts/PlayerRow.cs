@@ -31,6 +31,8 @@ public class PlayerRow : Row
 
         // Setup the ball
         ball.SetIndex(index);
+        ball.SetParentRow(this);
+        ball.SetIsOpponent(false);
     }
 
     private void SetupChecker()
@@ -48,5 +50,10 @@ public class PlayerRow : Row
 
         // Setup the checker
         checker.Initialize(this.m_nb_balls);
+    }
+
+    public bool IsActive()
+    {
+        return this.is_active;
     }
 }

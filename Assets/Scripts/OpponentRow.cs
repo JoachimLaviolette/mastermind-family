@@ -29,5 +29,7 @@ public class OpponentRow : Row
         // Setup the ball
         ball.SetIndex(index);
         ball.SetColor(color);
+        ball.SetParentRow(this);
+        ball.SetIsOpponent(true);
     }
 }

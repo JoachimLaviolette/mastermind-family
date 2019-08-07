@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class GameHandler : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class GameHandler : MonoBehaviour
     private void Start()
     {
         this.Initialize();
+        this.RegisterEvents();
     }
 
     private void Initialize()
@@ -15,6 +17,12 @@ public class GameHandler : MonoBehaviour
         turn = 0;
         this.IntializeOpponentRow();
         this.InitializePlayerRow();
+    }
+
+    private void RegisterEvents()
+    {
+        Ball.e_OnClickColoredBall += this.ChangeBallColor;
+        Ball.e_OnClickBlankBall += this.ChooseBallColor;
     }
 
     private void IntializeOpponentRow()
@@ -26,7 +34,7 @@ public class GameHandler : MonoBehaviour
         OpponentRow opponentRow = ts_OpponentRow.GetComponent<OpponentRow>();
 
         // Then setup the row
-        opponentRow.Initialize(this.m_nb_balls, turn);      
+        opponentRow.Initialize(this.m_nb_balls, turn);
     }
 
     private void InitializePlayerRow()
@@ -39,5 +47,27 @@ public class GameHandler : MonoBehaviour
 
         // Then setup the row
         playerRow.Initialize(this.m_nb_balls, turn);
+    }
+
+    private void ChangeBallColor(object sender, EventArgs e)
+    {
+        // Open UI popup to change the color of the ball
+        Debug.Log("Change ball color event!");
+
+        Ball ball = sender as Ball;
+        int random_index = UnityEngine.Random.Range(0, 8);
+        BallManager.Color color = BallManager.GetColor(random_index);
+        ball.SetColor(color);
+    }
+
+    private void ChooseBallColor(object sender, EventArgs e)
+    {
+        // Open UI popup to choose the color for the ball
+        Debug.Log("Choose ball color event!");
+
+        Ball ball = sender as Ball;
+        int random_index = UnityEngine.Random.Range(0, 8);
+        BallManager.Color color = BallManager.GetColor(random_index);
+        ball.SetColor(color);
     }
 }
