@@ -2,6 +2,7 @@
 
 public class Utils : MonoBehaviour
 {
+    private static Camera player_camera = AssetManager.instance.GetPlayerCamera();
     private static Vector3 POSITION_0_OPPONENT_ROW = AssetManager.instance.GetOpponentRow().transform.position;
     private static Vector3 POSITION_0_PLAYER_ROW = AssetManager.instance.GetPlayerRow().transform.position;
     private static Vector3 POSITION_0_CHECKER = AssetManager.instance.GetChecker().transform.position;
@@ -32,7 +33,7 @@ public class Utils : MonoBehaviour
     {
         Vector3 position = is_opponent ? POSITION_0_OPPONENT_ROW : POSITION_0_PLAYER_ROW;
         // offset of 0.3f between each ball of the same row
-        position.x -= index * 0.3f; 
+        position.x += index * 0.3f; 
 
         return position;
     }
@@ -57,5 +58,10 @@ public class Utils : MonoBehaviour
         position.x += index * 0.15f; 
 
         return position;
+    }
+
+    public static Vector3 GetLocalPosition(Vector3 position)
+    {
+        return player_camera.ScreenToViewportPoint(position);
     }
 }

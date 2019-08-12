@@ -160,6 +160,7 @@ MonoBehaviour:
     type: 3}
   pf_OpponentRow: {fileID: 9114220063606721253, guid: 1caa9de192d542044ab8d3bd5a4468bc,
     type: 3}
+  player_camera: {fileID: 963194227}
 --- !u!4 &35065524
 Transform:
   m_ObjectHideFlags: 0
@@ -329,7 +330,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 60.92, y: -17.7, z: 0}
 --- !u!1 &963194225
 GameObject:
@@ -744,7 +745,7 @@ PrefabInstance:
     - target: {fileID: 8359759628260731758, guid: cf3255cf664b16f45a3c36dc43e58b2c,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8359759628260731758, guid: cf3255cf664b16f45a3c36dc43e58b2c,
         type: 3}

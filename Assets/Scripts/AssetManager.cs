@@ -9,6 +9,7 @@ public class AssetManager : MonoBehaviour
     [SerializeField] private CheckerItem pf_CheckerItem;
     [SerializeField] private PlayerRow pf_PlayerRow;
     [SerializeField] private OpponentRow pf_OpponentRow;
+    [SerializeField] private Camera player_camera;
 
     private void Awake()
     {
@@ -43,5 +44,10 @@ public class AssetManager : MonoBehaviour
     public GameObject GetOpponentRow()
     {
         return this.pf_OpponentRow.gameObject;
+    }
+
+    public Camera GetPlayerCamera()
+    {
+        return this.player_camera;
     }
 }

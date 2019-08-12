@@ -2,14 +2,13 @@
 using UnityEngine.EventSystems;
 using System;
 
-public class Ball : MonoBehaviour, IPointerClickHandler
+public class Ball : MonoBehaviour
 {
     private BallManager.Color m_color;
     private int m_index;
     private Material m_mat;
     private Row m_parent_row;
-    private bool is_opponent, is_colored;
-    public static EventHandler e_OnClickColoredBall, e_OnClickBlankBall;
+    private bool is_opponent, is_colored, is_current;
 
     private void Awake()
     {
@@ -18,16 +17,24 @@ public class Ball : MonoBehaviour, IPointerClickHandler
         this.is_colored = false;
     }
 
-    public void OnPointerClick(PointerEventData pointerEventData)
+    private void Update()
     {
-        if (this.is_opponent) return; // can only click player balls
+        this.CheckIsCurrent();
+    }
 
-        PlayerRow parent_row = (PlayerRow) this.m_parent_row;
+    private void CheckIsCurrent()
+    {
+        if (this.is_current) this.TurnLight(true);
+        else this.TurnLight(false);
+    }
 
-        if (!parent_row.IsActive()) return; // not clickable
+    private void TurnLight(bool on)
+    {
+        if (!on) if (!this.GetComponent<Light>()) return;
+        if (on) if (this.GetComponent<Light>()) return;
 
-        if (this.is_colored) e_OnClickColoredBall.Invoke(this, EventArgs.Empty);
-        else e_OnClickColoredBall.Invoke(this, EventArgs.Empty);
+        if (on) BallManager.AddBallLight(this);
+        else Destroy(this.GetComponent<Light>());
     }
 
     /**
@@ -80,13 +87,53 @@ public class Ball : MonoBehaviour, IPointerClickHandler
         this.m_parent_row = parent_row;
     }
 
+    /**
+     * Set if the ball is colored
+     */
     public void SetIsColored(bool is_colored)
     {
         this.is_colored = is_colored;
     }
 
+    /**
+     * Set if the ball is the current targeted
+     */
+    public void SetIsCurrent(bool is_current)
+    {
+        this.is_current = is_current;
+    }
+
+    /**
+     * Return if the ball is colored
+     */
     public bool IsColored()
     {
         return this.is_colored;
+    }
+
+    /**
+     * Return if the ball is the current targetd
+     */
+    public bool IsCurrent()
+    {
+        return this.is_current;
+    }
+
+    /**
+     * Return the index of the ball color
+     */
+    public int GetColorIndex()
+    {
+        if (!this.is_colored) new UnityException("Trying to access the color index of a non-colored ball.");
+
+        return BallManager.GetColorIndex(this);
+    }
+
+    /**
+     * Get the ball color
+     */
+    public BallManager.Color GetColor()
+    {
+        return this.m_color;
     }
 }

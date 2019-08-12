@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class BallManager : MonoBehaviour
@@ -33,6 +32,9 @@ public class BallManager : MonoBehaviour
         InitializeColorRefIndex();
     }
 
+    /**
+     * Initialize the color ref dictionary
+     */
     private static void InitializeColorRef()
     {
         color_values = new Dictionary<Color, UnityEngine.Color>();
@@ -46,6 +48,9 @@ public class BallManager : MonoBehaviour
         InitializeComplexColors();
     }
 
+    /**
+     * Initialize the complex colors
+     */
     private static void InitializeComplexColors()
     {
         UnityEngine.Color color;
@@ -61,6 +66,9 @@ public class BallManager : MonoBehaviour
         color_values.Add(Color.Pink, color);
     }
 
+    /**
+     * Initialize the color ref indices
+     */
     private static void InitializeColorRefIndex()
     {
         color_index = new Dictionary<int, Color>();
@@ -89,5 +97,44 @@ public class BallManager : MonoBehaviour
     public static Color GetColor(int index)
     {
         return color_index[index];
+    }
+
+    /**
+     * Get the colors
+     */
+    public static Dictionary<int, Color> GetColors()
+    {
+        return color_index;
+    }
+
+    /**
+     * Get the current ball light component
+     */
+    public static void AddBallLight(Ball ball)
+    {
+        Light ball_light = ball.gameObject.AddComponent<Light>();
+        ball_light.type = LightType.Point;
+        ball_light.color = UnityEngine.Color.white;
+        ball_light.intensity = 2.5f;
+        ball_light.lightmapBakeType = LightmapBakeType.Realtime;
+    }
+
+    /**
+     * Dyanmically set the given color to the given ball
+     */
+    public static void SetColor(Ball ball, Color color)
+    {
+        ball.GetComponent<MeshRenderer>().material.color = GetColor(color);
+    }
+
+    /**
+     * Get the color index of the specified ball
+     */
+    public static int GetColorIndex(Ball ball)
+    {
+        for (int i = 0; i < color_index.Count; i++)
+            if (color_index[i] == ball.GetColor()) return i;
+
+        return 0;
     }
 }

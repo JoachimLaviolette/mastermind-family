@@ -6,9 +6,12 @@ public class PlayerRow : Row
 {
     private bool is_active;
 
+    /**
+     * Initialize the player row
+     */
     public override void Initialize(int nb_balls, int turn)
     {
-        this.m_nb_balls = nb_balls;
+        base.Initialize(nb_balls, turn);
         this.is_active = true;
 
         for (int x = 0; x < this.m_nb_balls; x++) this.SetupBall(x);
@@ -17,6 +20,9 @@ public class PlayerRow : Row
         Utils.SetupPlayerRowPositionOnBoard(this, turn);
     }
 
+    /**
+     * Initialize the ball at the specified index
+     */
     protected override void SetupBall(int index)
     {
         // Retrieve the proper position
@@ -33,8 +39,14 @@ public class PlayerRow : Row
         ball.SetIndex(index);
         ball.SetParentRow(this);
         ball.SetIsOpponent(false);
+
+        // Add the current ball to the record
+        this.m_balls.Add(ball);
     }
 
+    /**
+     * Setup the checker of the row
+     */
     private void SetupChecker()
     {
         GameObject go_Checker = AssetManager.instance.GetChecker();
@@ -52,8 +64,22 @@ public class PlayerRow : Row
         checker.Initialize(this.m_nb_balls);
     }
 
+    /**
+     * Return if the row is the active one
+     */
     public bool IsActive()
     {
         return this.is_active;
+    }
+
+    /**
+     * Get the ball at the specified index
+     */
+    public Ball GetBall(int ball_index)
+    {
+        if (ball_index < 0 || ball_index > this.m_balls.Count) new UnityException("Trying to get a ball out of the list bounds.");
+        if (!this.is_active) new UnityException("Trying to get a ball from an unactive row.");
+
+        return this.m_balls[ball_index];
     }
 }

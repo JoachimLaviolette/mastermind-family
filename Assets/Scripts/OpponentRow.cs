@@ -4,7 +4,7 @@ public class OpponentRow : Row
 {
     public override void Initialize(int nb_balls, int turn)
     {
-        this.m_nb_balls = nb_balls;
+        base.Initialize(nb_balls, turn);
 
         // We reverse the order 
         for (int x = this.m_nb_balls - 1; x >= 0; x--) this.SetupBall(x);
@@ -31,5 +31,8 @@ public class OpponentRow : Row
         ball.SetColor(color);
         ball.SetParentRow(this);
         ball.SetIsOpponent(true);
+
+        // Add the current ball to the record
+        this.m_balls.Add(ball);
     }
 }
