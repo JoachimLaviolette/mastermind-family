@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerRow : Row
 {
+    private Checker m_checker;
     private bool is_active;
 
     /**
@@ -55,13 +56,13 @@ public class PlayerRow : Row
 
         // Create the checker game object
         Transform ts_Checker = Instantiate(go_Checker.transform, position, Quaternion.identity);
-        Checker checker = ts_Checker.GetComponent<Checker>();
+        this.m_checker = ts_Checker.GetComponent<Checker>();
 
         // Attach the newly-created checker to the opponent row parent
-        checker.transform.parent = this.transform;
+        this.m_checker.transform.parent = this.transform;
 
         // Setup the checker
-        checker.Initialize(this.m_nb_balls);
+        this.m_checker.Initialize(this.m_nb_balls);
     }
 
     /**
@@ -73,6 +74,14 @@ public class PlayerRow : Row
     }
 
     /**
+     * Set the current player row as active or not
+     */
+    public void SetIsActive(bool is_active)
+    {
+        this.is_active = is_active;
+    }
+
+    /**
      * Get the ball at the specified index
      */
     public Ball GetBall(int ball_index)
@@ -81,5 +90,24 @@ public class PlayerRow : Row
         if (!this.is_active) new UnityException("Trying to get a ball from an unactive row.");
 
         return this.m_balls[ball_index];
+    }
+
+    /**
+     * Return if the player row is full of colored balls or not
+     */
+    public bool IsFull()
+    {
+        foreach (Ball ball in this.m_balls)
+            if (!ball.IsColored()) return false;
+
+        return true;
+    }
+
+    /**
+     * Update the checker of the player row
+     */
+    public void UpdateChecker(int checker_item_index, bool is_good_pos, bool is_color_exist)
+    {
+        this.m_checker.UpdateCheckerItem(checker_item_index, is_good_pos, is_color_exist);
     }
 }

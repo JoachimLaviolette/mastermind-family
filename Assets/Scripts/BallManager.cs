@@ -28,14 +28,14 @@ public class BallManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
-        InitializeColorRef();
+        InitializeColorValues();
         InitializeColorRefIndex();
     }
 
     /**
      * Initialize the color ref dictionary
      */
-    private static void InitializeColorRef()
+    private static void InitializeColorValues()
     {
         color_values = new Dictionary<Color, UnityEngine.Color>();
         color_values.Add(Color.Red, UnityEngine.Color.red);
@@ -132,6 +132,8 @@ public class BallManager : MonoBehaviour
      */
     public static int GetColorIndex(Ball ball)
     {
+        if (color_index == null) InitializeColorRefIndex();
+
         for (int i = 0; i < color_index.Count; i++)
             if (color_index[i] == ball.GetColor()) return i;
 

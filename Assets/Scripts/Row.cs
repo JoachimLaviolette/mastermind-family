@@ -19,4 +19,9 @@ public abstract class Row : MonoBehaviour
     }
 
     protected abstract void SetupBall(int index);
+
+    public List<Ball> GetBalls()
+    {
+        return this.m_balls;
+    }
 }

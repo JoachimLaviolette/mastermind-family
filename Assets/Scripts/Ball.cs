@@ -136,4 +136,12 @@ public class Ball : MonoBehaviour
     {
         return this.m_color;
     }
+
+    /**
+     * Return if the ball equals the provided one
+     */
+    public bool Equals(Ball ball)
+    {
+        return this.m_color == ball.GetColor();
+    }
 }
