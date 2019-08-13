@@ -5,6 +5,8 @@ using UnityEngine;
 public class GameHandler : MonoBehaviour
 {
     [Range(1, 8)] public int m_nb_balls;
+    [Range(3, 10)] public int m_attempts;
+    private GameState m_state;
     private int turn;
     private Dictionary<int, BallManager.Color> colors;
     private int color_index;
@@ -13,8 +15,16 @@ public class GameHandler : MonoBehaviour
     private PlayerRow current_player_row;
     private OpponentRow opponent_row;
     List<Ball> player_balls, opponent_balls;
+    public static EventHandler<int> e_OnAttemptsChange;
 
     private const int DEFAULT_COLOR_INDEX = -1;
+
+    public enum GameState
+    {
+        PLAYING,
+        GAME_OVER,
+        WIN,
+    }
 
     private void Start()
     {
@@ -37,6 +47,7 @@ public class GameHandler : MonoBehaviour
         this.InitializePlayerRow();
         this.InitializeCurrentBall();
         this.opponent_balls = this.opponent_row.GetBalls();
+        this.InitializeGameState();
     }
 
     /**
@@ -82,6 +93,18 @@ public class GameHandler : MonoBehaviour
         this.ball_index = 0;
 
         this.SetCurrentBall();
+    }
+
+    /**
+     * Initialize the state of the game
+     */
+    private void InitializeGameState()
+    {
+        // Set the state of the game
+        this.m_state = GameState.PLAYING;
+
+        // Notify the UI to update
+        e_OnAttemptsChange?.Invoke(this, this.m_attempts - this.turn);
     }
 
     /**
@@ -168,12 +191,12 @@ public class GameHandler : MonoBehaviour
      */
     private void CheckCombination()
     {
-        List<Ball> player_balls = this.current_player_row.GetBalls();
+        this.player_balls = this.current_player_row.GetBalls();
         bool is_good_pos, is_color_exist = false, color_fully_found, initialize_new_row = false;
 
-        for (int x = 0, y = player_balls.Count - 1; x < player_balls.Count; x++, y--)
+        for (int x = 0, y = this.player_balls.Count - 1; x < this.player_balls.Count; x++, y--)
         {
-            Ball player_ball = player_balls[x];
+            Ball player_ball = this.player_balls[x];
 
             // Check if the facing balls have the same color
             is_good_pos = player_ball.Equals(this.opponent_balls[y]);
@@ -200,7 +223,7 @@ public class GameHandler : MonoBehaviour
 
         // If here, means the combination was successfull
         // So... it's a win!
-        // ...
+        this.Win();
         Debug.Log("The combination was successfull. Good job, you won!");
     }
 
@@ -213,13 +236,62 @@ public class GameHandler : MonoBehaviour
     }
 
     /**
-     * Initializz a new player row
+     * Initialize a new player row
      */
     private void InitializeNewRow()
     {
         this.turn++;
+
+        if (this.turn >= this.m_attempts)
+        {
+            this.GameOver();
+
+            return;
+        }
+
+        e_OnAttemptsChange?.Invoke(this, this.m_attempts - this.turn);
         this.current_player_row.SetIsActive(false);
         this.InitializePlayerRow();
         this.InitializeCurrentBall();
+    }
+
+    /**
+     * End the game (win)
+     */
+    private void Win()
+    {
+        // Set the state of the game
+        this.m_state = GameState.WIN;
+
+        // Notify the user the game is over
+        // ...
+        Debug.Log("Sorry but... the game is over. You'll do better next time!");
+
+        // Notify the UI to update
+        e_OnAttemptsChange?.Invoke(this, this.m_attempts - this.turn);
+    }
+
+    /**
+     * End the game (game over)
+     */
+    private void GameOver()
+    {
+        // Set the state of the game
+        this.m_state = GameState.GAME_OVER;
+        
+        // Notify the user the game is over
+        // ...
+        Debug.Log("Sorry but... the game is over. You'll do better next time!");
+
+        // Notify the UI to update
+        e_OnAttemptsChange?.Invoke(this, this.m_attempts - this.turn);
+    }
+
+    /**
+     * Return the current state of the game
+     */
+    public GameState GetGameState()
+    {
+        return this.m_state;
     }
 }
