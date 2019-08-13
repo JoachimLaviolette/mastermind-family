@@ -38,17 +38,6 @@ public class OpponentRow : Row
     }
 
     /**
-     * Return if one of the opponent balls has the provided color
-     */
-    public bool HasColor(BallManager.Color ball_color)
-    {
-        foreach (Ball ball in this.m_balls)
-            if (ball.GetColor() == ball_color) return true;
-
-        return false;
-    }
-
-    /**
      * Return the count of color found in the opponent row
      */
     private int CountColor(BallManager.Color ball_color)
@@ -73,6 +62,6 @@ public class OpponentRow : Row
             if (player_balls[x].GetColor() == ball_color && player_balls[x].Equals(this.m_balls[y]))
                 color_count--;
 
-        return color_count <= 0;
+        return color_count == 0;
     }
 }

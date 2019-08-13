@@ -192,7 +192,7 @@ public class GameHandler : MonoBehaviour
     private void CheckCombination()
     {
         this.player_balls = this.current_player_row.GetBalls();
-        bool is_good_pos, is_color_exist = false, color_fully_found, initialize_new_row = false;
+        bool is_good_pos, is_color_exist = false, initialize_new_row = false;
 
         for (int x = 0, y = this.player_balls.Count - 1; x < this.player_balls.Count; x++, y--)
         {
@@ -201,9 +201,8 @@ public class GameHandler : MonoBehaviour
             // Check if the facing balls have the same color
             is_good_pos = player_ball.Equals(this.opponent_balls[y]);
 
-            // Check if one of the opponent balls has the color
-            color_fully_found = this.opponent_row.IsColorFullyFound(player_ball.GetColor(), current_player_row);
-            if (!color_fully_found) is_color_exist = this.opponent_row.HasColor(player_ball.GetColor());
+            // Check if the color of the ball exists somewhere else in the row
+            is_color_exist = !this.opponent_row.IsColorFullyFound(player_ball.GetColor(), current_player_row);
 
             // If at least one of the balls is not well placed
             // We have to initialize a new row next turn
