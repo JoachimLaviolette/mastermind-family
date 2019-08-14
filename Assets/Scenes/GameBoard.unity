@@ -160,6 +160,8 @@ MonoBehaviour:
     type: 3}
   pf_OpponentRow: {fileID: 9114220063606721253, guid: 1caa9de192d542044ab8d3bd5a4468bc,
     type: 3}
+  pf_UI_Popup: {fileID: 4821759435369359431, guid: d8a08f53536088d42be32b2e94e32e11,
+    type: 3}
   player_camera: {fileID: 963194227}
 --- !u!4 &35065524
 Transform:
@@ -809,8 +811,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73999df8563db1e45948187180f17f01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_nb_balls: 5
-  m_attempts: 10
+  m_nb_balls: 4
+  m_attempts: 3
 --- !u!4 &1681760849
 Transform:
   m_ObjectHideFlags: 0

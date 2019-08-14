@@ -9,7 +9,11 @@ public class AssetManager : MonoBehaviour
     [SerializeField] private CheckerItem pf_CheckerItem;
     [SerializeField] private PlayerRow pf_PlayerRow;
     [SerializeField] private OpponentRow pf_OpponentRow;
+    [SerializeField] private GameObject pf_UI_Popup;
     [SerializeField] private Camera player_camera;
+
+    public const string SCENE_GAME_BOARD = "GameBoard";
+    public const string SCENE_GAME_MAIN_MENU = "GameMainMenu";
 
     private void Awake()
     {
@@ -44,6 +48,11 @@ public class AssetManager : MonoBehaviour
     public GameObject GetOpponentRow()
     {
         return this.pf_OpponentRow.gameObject;
+    }
+
+    public GameObject GetUIPopup()
+    {
+        return this.pf_UI_Popup;
     }
 
     public Camera GetPlayerCamera()

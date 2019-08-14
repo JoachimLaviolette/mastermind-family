@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameHandler : MonoBehaviour
 {
@@ -167,6 +168,9 @@ public class GameHandler : MonoBehaviour
 
         // Check the current row
         if (Input.GetKeyDown(KeyCode.Return)) this.CheckCurrentRow();
+
+        // Quit the game
+        if (Input.GetKeyDown(KeyCode.Escape)) this.Quit();
     }
 
     private void CheckCurrentRow()
@@ -220,10 +224,9 @@ public class GameHandler : MonoBehaviour
             return;
         }
 
-        // If here, means the combination was successfull
+        // If here, means the combination was successful
         // So... it's a win!
         this.Win();
-        Debug.Log("The combination was successfull. Good job, you won!");
     }
 
     /**
@@ -262,10 +265,6 @@ public class GameHandler : MonoBehaviour
         // Set the state of the game
         this.m_state = GameState.WIN;
 
-        // Notify the user the game is over
-        // ...
-        Debug.Log("Sorry but... the game is over. You'll do better next time!");
-
         // Notify the UI to update
         e_OnAttemptsChange?.Invoke(this, this.m_attempts - this.turn);
     }
@@ -278,10 +277,6 @@ public class GameHandler : MonoBehaviour
         // Set the state of the game
         this.m_state = GameState.GAME_OVER;
         
-        // Notify the user the game is over
-        // ...
-        Debug.Log("Sorry but... the game is over. You'll do better next time!");
-
         // Notify the UI to update
         e_OnAttemptsChange?.Invoke(this, this.m_attempts - this.turn);
     }
@@ -292,5 +287,13 @@ public class GameHandler : MonoBehaviour
     public GameState GetGameState()
     {
         return this.m_state;
+    }
+
+    /**
+     * Quit the game
+     */
+    private void Quit()
+    {
+        SceneManager.LoadScene(AssetManager.SCENE_GAME_MAIN_MENU);
     }
 }

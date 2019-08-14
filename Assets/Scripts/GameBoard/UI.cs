@@ -33,9 +33,15 @@ public class UI : MonoBehaviour
         {
             case GameHandler.GameState.GAME_OVER:
                 this.UI_Attempts.text = UI_GAME_OVER_STR;
+                UIManager.CreateUIPopup(UI_GAME_OVER_STR, "Sorry but... the game is over. You'll do better next time!");
+                Debug.Log("Sorry but... the game is over. You'll do better next time!");
+
                 return;
             case GameHandler.GameState.WIN:
                 this.UI_Attempts.text = UI_WIN_STR;
+                UIManager.CreateUIPopup(UI_WIN_STR, "Well done! You've found the right combination!");
+                Debug.Log("Well done! You've found the right combination!");
+
                 return;
         }
 

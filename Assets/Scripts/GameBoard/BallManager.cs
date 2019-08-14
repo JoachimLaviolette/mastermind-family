@@ -116,7 +116,6 @@ public class BallManager : MonoBehaviour
         ball_light.type = LightType.Point;
         ball_light.color = UnityEngine.Color.white;
         ball_light.intensity = 2.5f;
-        ball_light.lightmapBakeType = LightmapBakeType.Realtime;
     }
 
     /**
