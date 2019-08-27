@@ -4,16 +4,35 @@ using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
+    private static GameObject UI_popup_choose_difficulty;
+    private static GameObject UI_popup_choose_custom_settings;
+
     /**
-     * Create a new choose difficulty UI popup with the provided params
+     * Create a new popup to choose game difficulty
      */
     public static void CreateChooseDifficultyPopup()
     {
-        Instantiate(AssetManager.instance.GetUIChooseDifficultyPopup(), Vector3.zero, Quaternion.identity);
+        // Destroy choose difficulty popup
+        if (UI_popup_choose_custom_settings != null) Destroy(UI_popup_choose_custom_settings);
+
+        // Instantiate the new popup
+        UI_popup_choose_difficulty = Instantiate(AssetManager.instance.GetUIChooseDifficultyPopup(), Vector3.zero, Quaternion.identity);
     }
 
     /**
-     * Create a new end game UI popup with the provided params
+     * Create a new popup to choose custom game settings
+     */
+    public static void CreateChooseCustomSettingsPopup()
+    {
+        // Destroy choose difficulty popup
+        if (UI_popup_choose_difficulty != null) Destroy(UI_popup_choose_difficulty);
+
+        // Instantiate the new popup
+        UI_popup_choose_custom_settings = Instantiate(AssetManager.instance.GetUIChooseCustomSettingsPopup(), Vector3.zero, Quaternion.identity);
+    }
+
+    /**
+     * Create a new popup to display end game message
      */
     public static void CreateEndGamePopup(string title, string message)
     {

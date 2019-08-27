@@ -7,8 +7,11 @@
  * To launch a new game such as AI or custom params
  */
 
-public static class SceneParams
+public static class SceneManager
 {
+    public const string SCENE_GAME_SCENE = "GameScene";
+    public const string SCENE_GAME_MENU = "GameMenu";
+
     public enum GAME_DIFFICULTY
     {
         EASY,

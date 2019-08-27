@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class UI : MonoBehaviour
+public class GameSceneUI : MonoBehaviour
 {
     private Canvas UI_Canvas;
     private Text UI_Attempts;

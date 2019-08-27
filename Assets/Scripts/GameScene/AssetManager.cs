@@ -9,11 +9,11 @@ public class AssetManager : MonoBehaviour
     [SerializeField] private CheckerItem pf_CheckerItem;
     [SerializeField] private PlayerRow pf_PlayerRow;
     [SerializeField] private OpponentRow pf_OpponentRow;
-    [SerializeField] private GameObject pf_UI_ChooseDifficulty_Popup, pf_UI_EndGame_Popup;
+    [SerializeField] private GameObject 
+        pf_UI_ChooseDifficulty_Popup,
+        pf_UI_ChooseCustomSettings_Popup,
+        pf_UI_EndGame_Popup;
     [SerializeField] private Camera player_camera;
-
-    public const string SCENE_GAME_SCENE = "GameScene";
-    public const string SCENE_GAME_MENU = "GameMenu";
 
     private void Awake()
     {
@@ -53,6 +53,11 @@ public class AssetManager : MonoBehaviour
     public GameObject GetUIChooseDifficultyPopup()
     {
         return this.pf_UI_ChooseDifficulty_Popup;
+    }
+
+    public GameObject GetUIChooseCustomSettingsPopup()
+    {
+        return this.pf_UI_ChooseCustomSettings_Popup;
     }
 
     public GameObject GetUIEndGamePopup()
