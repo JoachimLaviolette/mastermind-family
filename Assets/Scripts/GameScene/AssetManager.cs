@@ -9,10 +9,12 @@ public class AssetManager : MonoBehaviour
     [SerializeField] private CheckerItem pf_CheckerItem;
     [SerializeField] private PlayerRow pf_PlayerRow;
     [SerializeField] private OpponentRow pf_OpponentRow;
-    [SerializeField] private GameObject 
+    [SerializeField]
+    private GameObject
         pf_UI_ChooseDifficulty_Popup,
         pf_UI_ChooseCustomSettings_Popup,
-        pf_UI_EndGame_Popup;
+        pf_UI_EndGame_Popup,
+        pf_UI_ConfirmExitGame_Popup;
     [SerializeField] private Camera player_camera;
 
     private void Awake()
@@ -63,6 +65,11 @@ public class AssetManager : MonoBehaviour
     public GameObject GetUIEndGamePopup()
     {
         return this.pf_UI_EndGame_Popup;
+    }
+
+    public GameObject GetUIConfirmExitGamePopup()
+    {
+        return this.pf_UI_ConfirmExitGame_Popup;
     }
 
     public Camera GetPlayerCamera()

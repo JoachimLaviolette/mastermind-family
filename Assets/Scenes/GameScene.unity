@@ -162,7 +162,11 @@ MonoBehaviour:
     type: 3}
   pf_UI_ChooseDifficulty_Popup: {fileID: 4821759435369359431, guid: 6699110e3dbcc3c42a5f64aaef8ca9cf,
     type: 3}
+  pf_UI_ChooseCustomSettings_Popup: {fileID: 4821759435369359431, guid: d6805698334b9a540b2ba8ef1c576800,
+    type: 3}
   pf_UI_EndGame_Popup: {fileID: 4821759435369359431, guid: d8a08f53536088d42be32b2e94e32e11,
+    type: 3}
+  pf_UI_ConfirmExitGame_Popup: {fileID: 4821759435369359431, guid: 7e984413fd7be444cb4de7a37a7c9d7a,
     type: 3}
   player_camera: {fileID: 963194227}
 --- !u!4 &35065524

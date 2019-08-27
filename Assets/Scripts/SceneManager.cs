@@ -22,7 +22,7 @@ public static class SceneManager
 
     private static GAME_DIFFICULTY game_difficulty = GAME_DIFFICULTY.EASY;
     private static int 
-        nb_attemps = DEFAULT_NB_ATTEMPTS,
+        nb_attempts = DEFAULT_NB_ATTEMPTS,
         nb_balls = DEFAULT_NB_BALLS;
 
     private const int
@@ -46,17 +46,17 @@ public static class SceneManager
         switch (game_difficulty)
         {
             case GAME_DIFFICULTY.EASY:
-                nb_attemps = MAX_NB_ATTEMPTS;
+                nb_attempts = MAX_NB_ATTEMPTS;
                 nb_balls = MIN_NB_BALLS;
 
                 return;
             case GAME_DIFFICULTY.NORMAL:
-                nb_attemps = MID_NB_ATTEMPTS;
+                nb_attempts = MID_NB_ATTEMPTS;
                 nb_balls = MID_NB_BALLS;
 
                 return;
             case GAME_DIFFICULTY.HARD:
-                nb_attemps = MIN_NB_ATTEMPTS;
+                nb_attempts = MIN_NB_ATTEMPTS;
                 nb_balls = MAX_NB_BALLS;
 
                 return;
@@ -64,21 +64,13 @@ public static class SceneManager
     }
 
     /**
-     * Setter for custom rules
-     * Set the number of attempts
+     * Setter for custom settings
      */
-    public static void SetNbAttempts(int nbAttempts)
+    public static void LoadParams(int nbAttempts, int nbBalls)
     {
-        nb_attemps = nbAttempts;
-    }
-
-    /**
-     * Setter for custom rules
-     * Set the number of balls
-     */
-    public static void SetNbBalls(int nbBalls)
-    {
-        nb_balls = nbBalls;
+        game_difficulty = GAME_DIFFICULTY.CUSTOM;
+        nb_attempts = Mathf.Max(nbAttempts, 1);
+        nb_balls = nbBalls > MAX_NB_BALLS ? MAX_NB_BALLS : Mathf.Max(nbBalls, 1);
     }
 
     /**
@@ -94,7 +86,7 @@ public static class SceneManager
      */
     public static int GetNbAttempts()
     {
-        return nb_attemps;
+        return nb_attempts;
     }
 
     /**
@@ -111,7 +103,7 @@ public static class SceneManager
     public static void Reset()
     {
         game_difficulty = GAME_DIFFICULTY.EASY;
-        nb_attemps = DEFAULT_NB_ATTEMPTS;
+        nb_attempts = DEFAULT_NB_ATTEMPTS;
         nb_balls = DEFAULT_NB_BALLS;
         Debug.Log("All params have been reset.");
     }

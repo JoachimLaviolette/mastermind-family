@@ -6,6 +6,7 @@ public class UIManager : MonoBehaviour
 {
     private static GameObject UI_popup_choose_difficulty;
     private static GameObject UI_popup_choose_custom_settings;
+    private static GameObject UI_popup_confirm_exit_game;
 
     /**
      * Create a new popup to choose game difficulty
@@ -39,5 +40,25 @@ public class UIManager : MonoBehaviour
         GameObject go_UI_EndGame_Popup = Instantiate(AssetManager.instance.GetUIEndGamePopup(), Vector3.zero, Quaternion.identity);
         UIEndGamePopup UI_EndGame_Popup = go_UI_EndGame_Popup.GetComponent<UIEndGamePopup>();
         UI_EndGame_Popup.Setup(title, message);
+    }
+
+    /**
+     * Create a new popup to ask the player to confirm
+     * Game exit
+     */
+    public static void CreateConfirmExitGamePopup()
+    {
+        if (UI_popup_confirm_exit_game != null) return;
+
+        // Instantiate the new popup
+        UI_popup_confirm_exit_game = Instantiate(AssetManager.instance.GetUIConfirmExitGamePopup(), Vector3.zero, Quaternion.identity);
+    }
+
+    /**
+     * Destroy exit game popup
+     */
+    public static void DestroyConfirmExitGamePopup()
+    {
+        Destroy(UI_popup_confirm_exit_game);
     }
 }

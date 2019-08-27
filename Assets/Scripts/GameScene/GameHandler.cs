@@ -8,7 +8,6 @@ public class GameHandler : MonoBehaviour
     // Game params
     private int m_nb_balls;
     private int m_attempts;
-    private SceneManager.GAME_DIFFICULTY m_game_difficulty;
 
     private GameState m_state;
     private int turn;
@@ -60,7 +59,6 @@ public class GameHandler : MonoBehaviour
      */
      private void InitializeGameParams()
     {
-        this.m_game_difficulty = SceneManager.GetGameDifficulty();
         this.m_attempts = SceneManager.GetNbAttempts();
         Debug.Log(this.m_attempts);
         this.m_nb_balls = SceneManager.GetNbBalls();
@@ -305,11 +303,10 @@ public class GameHandler : MonoBehaviour
     }
 
     /**
-     * Quit the game
+     * Dislay the popup to confirm to exit the game
      */
     private void Quit()
     {
-        SceneManager.Reset();
-        UnityEngine.SceneManagement.SceneManager.LoadScene(SceneManager.SCENE_GAME_MENU);
+        UIManager.CreateConfirmExitGamePopup();
     }
 }
