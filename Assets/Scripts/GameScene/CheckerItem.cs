@@ -65,7 +65,7 @@ public class CheckerItem : MonoBehaviour
     }
 
     /**
-     * Dyanmically set the given color to the given ball
+     * Dynamically set the given color of the given ball
      */
     private void SetColor(Color color)
     {
@@ -73,7 +73,7 @@ public class CheckerItem : MonoBehaviour
     }
 
     /**
-     * Get a UnityEngine color from a color
+     * Get a UnityEngine color value from a checker state color
      */
     private UnityEngine.Color GetColor(Color color)
     {

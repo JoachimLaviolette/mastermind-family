@@ -22,14 +22,14 @@ public class Checker : MonoBehaviour
 
     private void SetupCheckerItem(int index)
     {
-        // Retrieve the proper position
+        // Retrieve the proper position of the checker according to the provided index
         Vector3 position = Utils.GetCheckItemPosition(index);
 
-        // Create the ball game object
+        // Create the ball
         Transform ts_CheckerItem = Instantiate(this.go_CheckerItem.transform, position, Quaternion.identity);
         CheckerItem checker_item = ts_CheckerItem.GetComponent<CheckerItem>();
 
-        // Attach the newly-created checker item to the checker row parent
+        // Attach the checker item to the checker row parent
         checker_item.transform.parent = this.transform;
 
         // Setup the ball

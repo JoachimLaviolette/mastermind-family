@@ -13,14 +13,14 @@ public class OpponentRow : Row
 
     protected override void SetupBall(int index)
     {
-        // Retrieve the proper position
+        // Retrieve the proper position of the ball according to the provided index
         Vector3 position = Utils.GetBallPosition(index, true);
 
-        // Create the ball game object
+        // Create the ball
         Transform ts_Ball = Instantiate(this.go_Ball.transform, position, Quaternion.identity);
         Ball ball = ts_Ball.GetComponent<Ball>();
 
-        // Attach the newly-created the ball to the opponent row parent
+        // Attach the ball to the opponent row parent
         ball.transform.parent = this.transform;
 
         // Select a random color

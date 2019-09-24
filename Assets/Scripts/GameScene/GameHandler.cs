@@ -232,6 +232,15 @@ public class GameHandler : MonoBehaviour
         if (initialize_new_row)
         {
             Debug.Log("The combination was not successfull. Try again!");
+            this.turn++;
+
+            if (this.turn >= this.m_attempts)
+            {
+                this.GameOver();
+
+                return;
+            }
+
             this.InitializeNewRow();
 
             return;
@@ -255,15 +264,6 @@ public class GameHandler : MonoBehaviour
      */
     private void InitializeNewRow()
     {
-        this.turn++;
-
-        if (this.turn >= this.m_attempts)
-        {
-            this.GameOver();
-
-            return;
-        }
-
         e_OnAttemptsChange?.Invoke(this, this.m_attempts - this.turn);
         this.current_player_row.SetIsActive(false);
         this.InitializePlayerRow();
@@ -303,7 +303,7 @@ public class GameHandler : MonoBehaviour
     }
 
     /**
-     * Dislay the popup to confirm to exit the game
+     * Display the popup to confirm quit action
      */
     private void Quit()
     {

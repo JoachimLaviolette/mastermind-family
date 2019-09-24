@@ -93,7 +93,7 @@ public class PlayerRow : Row
     }
 
     /**
-     * Return if the player row is full of colored balls or not
+     * Return if the player row is fully colored or not
      */
     public bool IsFull()
     {

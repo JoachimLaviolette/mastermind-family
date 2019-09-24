@@ -71,6 +71,4 @@ public class GameSceneUI : MonoBehaviour
 
         this.UI_Attempts.text = UI_ATTEMPTS_STR + attempts_left;
     }
-
-
 }

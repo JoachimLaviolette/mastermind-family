@@ -49,7 +49,7 @@ public class BallManager : MonoBehaviour
     }
 
     /**
-     * Initialize the complex colors
+     * Initialize the set of complex colors
      */
     private static void InitializeComplexColors()
     {
@@ -84,7 +84,7 @@ public class BallManager : MonoBehaviour
     }
 
     /**
-     * Get a UnityEngine color from a color
+     * Get a UnityEngine color value from a ball color
      */
     public static UnityEngine.Color GetColor(Color color)
     {
@@ -100,7 +100,7 @@ public class BallManager : MonoBehaviour
     }
 
     /**
-     * Get the colors
+     * Get the all ball colors
      */
     public static Dictionary<int, Color> GetColors()
     {
@@ -119,7 +119,7 @@ public class BallManager : MonoBehaviour
     }
 
     /**
-     * Dyanmically set the given color to the given ball
+     * Dynamically set the given color of the given ball
      */
     public static void SetColor(Ball ball, Color color)
     {

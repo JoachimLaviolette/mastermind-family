@@ -112,7 +112,7 @@ public class Ball : MonoBehaviour
     }
 
     /**
-     * Return if the ball is the current targetd
+     * Return if the ball is the current target
      */
     public bool IsCurrent()
     {
